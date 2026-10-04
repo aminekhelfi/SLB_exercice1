@@ -52,8 +52,7 @@ pre, code {
 
 # Exercice — Dirty COW
 
-**Nom :** Khelfi
-**Prénom :** Amine
+**Auteur:** Amine Khelfi, Anthony Ledda, Shashkov Mikhail
 **Date :** 04.10.2026
 
 ## 1. Identifier la CVE de Dirty COW
@@ -61,15 +60,8 @@ pre, code {
 **Nom :** Dirty COW  
 **Identifiant :** CVE-2016-5195  
 **Type :** race condition dans le noyau Linux  
-**Impact :** élévation locale de privilèges.
-
-
-Dirty COW est une vulnérabilité du noyau Linux liée au mécanisme Copy-on-Write (CoW). Ce mécanisme permet de partager des pages mémoire et de ne créer une copie privée que lorsqu’une modification est demandée.
-
-
-La vulnérabilité viens d’une de synchronisation mal faite entre des opérations mémoire concurrentes. Un utilisateur peut exploiter cette condition de concurrence pour contourner, les protections en écriture et modifier le contenu d’un fichier normalement protégé.
-
-**Conséquence :** la modification d’un fichier sensible, par exemple un exécutable SUID, pouvait être utilisée dans un scénario d’élévation de privilèges jusqu’à `root`.
+**Impact :** élévation locale de privilèges.  
+**URL de la CVE :** [https://nvd.nist.gov/vuln/detail/CVE-2016-5195](https://nvd.nist.gov/vuln/detail/CVE-2016-5195) (fiche MITRE : [https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5195](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-5195))
 
 
 ## 2. Trouvez les exploits disponibles sur exploit-db
@@ -92,7 +84,9 @@ Voici les variantes:
 - [EDB-40839](https://www.exploit-db.com/exploits/40839)
 - [EDB-40847](https://www.exploit-db.com/exploits/40847)
 
-## 3.Démontrez un exploit dans une VM
+## 3. Démontrez un exploit dans une VM
+
+**Capture 1 — Préparation de la cible.** On vérifie que le noyau est vulnérable (`4.4.0-21-generic`) et qu'on est un utilisateur non privilégié (`uid=1000`). On crée ensuite un fichier `/tmp/dirtycow-test` appartenant à `root` en lecture seule pour les autres (`-rw-r--r--`). La tentative d'écriture en tant qu'utilisateur normal est bien refusée (`Permission denied`).
 
 ```bash
 amine@ubuntu:~$ uname -r
@@ -113,7 +107,7 @@ amine@ubuntu:~$ cat /tmp/dirtycow-test
 ORIGINAL
 amine@ubuntu:~$
 ```
-
+**Capture 2 — Création et exécution de l'exploit.** On télécharge le code source de l'exploit EDB-40611 depuis Exploit-DB (`wget`), puis on le compile. On lance ensuite le binaire en lui passant le fichier cible et la chaîne à écrire.. Malgré nos droits limités, le contenu du fichier `root` est bien modifié. Ecriture réussite :)
 
 ```bash 
 amine@ubuntu:~$ mkdir -p ~/dirtycow
