@@ -1,0 +1,48 @@
+```css
+body {
+    font-family: Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.15;
+    margin: 1.5cm;
+}
+
+h1 {
+    font-size: 18pt;
+    margin-bottom: 10pt;
+}
+
+h2 {
+    font-size: 13pt;
+    margin-top: 10pt;
+    margin-bottom: 5pt;
+}
+
+h3 {
+    font-size: 11pt;
+    margin-top: 8pt;
+    margin-bottom: 4pt;
+}
+
+p {
+    margin-top: 4pt;
+    margin-bottom: 4pt;
+}
+
+pre, code {
+    font-family: "Courier New", monospace;
+    font-size: 8.5pt;
+}
+
+pre {
+    padding: 5pt;
+    white-space: pre-wrap;
+}
+
+table {
+    font-size: 9pt;
+}
+
+li {
+    margin-bottom: 2pt;
+}
+```
